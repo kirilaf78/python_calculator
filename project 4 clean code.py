@@ -2,17 +2,23 @@ import argparse
 
 import math
 
-#python C:\working.py --type annuity --principal 1000000 --periods 60 --interest 10
+#creating an ArgumentParser object which will store all the information about the arguments:
 
-parser = argparse.ArgumentParser(description="This program is a calculator.")
+parser = argparse.ArgumentParser(description = "This program is a calculator.")
 
+#Adding arguments using the add_argument() method:
+ 
 parser.add_argument('--type')
 parser.add_argument('--principal', type = int)       
 parser.add_argument('--payment', type = int)
 parser.add_argument('--interest', type = float)
 parser.add_argument('--periods', type = int)
 
+#adding parse_args() method for reading argument strings from the command line:
+
 args = parser.parse_args()
+
+#displaying an error message when fewer than four parameters are provided:
 
 parameters = [args.type, args.principal, args.payment, args.interest, args.periods]
 
@@ -27,27 +33,35 @@ for element in parameters:
         else:
             count += 1
             i += 1
-                   
+                  
 if count >= 2:
         print('Incorrect parameters')
 
+#displaying an error message when negative values are entered:
+        
 while a < len(parameters): 
         if parameters[a] == None or parameters[a] >= 0:
                 a += 1
-                      
         else:
             negative_value += 1
             a += 1
 if negative_value >= 1:
         print('Incorrect parameters')
-              
 
+
+#If --type is specified neither as "annuity" nor as "diff" or not specified at all, show the error message:
+        
 elif args.type != 'annuity' and args.type != 'diff' or args.type == None:
         print('Incorrect parameters')
 
+#displaying an error message  because --interest is missing:
+        
 elif args.interest == None:
-        print('Incorrect parameters')        
-
+        print('Incorrect parameters')
+        
+#annuity payment       
+#calculating and printing periods (number of monthes) and overpayment:
+        
 elif args.type == 'annuity' and args.periods == None:
         nominal_interest_rate = args.interest / (12 * 100)
         a = args.payment / (args.payment - nominal_interest_rate * args.principal )
@@ -70,8 +84,10 @@ elif args.type == 'annuity' and args.periods == None:
                     print(f'It will take {years} years and {months} months to repay this loan!')
         
         print(f'Overpayment = {overpayment}')    
-
-    
+               
+#annuity payment       
+#calculating and printing payment (monthly payment) and overpayment:
+        
 elif args.type == 'annuity' and args.payment == None:
        
         nominal_interest_rate = args.interest / (12 * 100)
@@ -81,6 +97,9 @@ elif args.type == 'annuity' and args.payment == None:
         print(f'Your annuity payment = {args.payment}!')
         overpayment = (args.payment * args.periods) - args.principal
         print(f'Overpayment = {overpayment}')
+
+#annuity payment       
+#calculating and printing principal and overpayment:
         
 elif args.type == 'annuity' and args.principal == None:
         nominal_interest_rate = args.interest / (12 * 100)
@@ -91,6 +110,9 @@ elif args.type == 'annuity' and args.principal == None:
         overpayment = (args.payment * args.periods) - loan_principal
         overpayment = round(overpayment)
         print(f'Overpayment = {overpayment}')        
+
+#differentiated payments
+#calculating and printing payment and overpayment:
         
 elif args.type == 'diff' and args.payment == None:
         nominal_interest_rate = args.interest / (12 * 100)
@@ -105,4 +127,9 @@ elif args.type == 'diff' and args.payment == None:
                 counter += 1
    
         overpayment = total_paid - args.principal    
-        print(f'Overpayment = {overpayment}')         
+        print(f'Overpayment = {overpayment}')
+        
+#path in command line to execute the program:
+#example: python C:\working.py --type annuity --principal 1000000 --periods 60 --interest 10
+
+
