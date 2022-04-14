@@ -1,11 +1,8 @@
 import argparse
 
-
 import math
 
-
 #python C:\working.py --type annuity --principal 1000000 --periods 60 --interest 10
-
 
 parser = argparse.ArgumentParser(description="This program is a calculator.")
 
@@ -30,34 +27,26 @@ for element in parameters:
         else:
             count += 1
             i += 1
-        
-                    
+                   
 if count >= 2:
         print('Incorrect parameters')
-
 
 while a < len(parameters): 
         if parameters[a] == None or parameters[a] >= 0:
                 a += 1
-                       
+                      
         else:
             negative_value += 1
             a += 1
 if negative_value >= 1:
         print('Incorrect parameters')
-
-
-               
+              
 
 elif args.type != 'annuity' and args.type != 'diff' or args.type == None:
         print('Incorrect parameters')
-  
-
 
 elif args.interest == None:
         print('Incorrect parameters')        
-
-     
 
 elif args.type == 'annuity' and args.periods == None:
         nominal_interest_rate = args.interest / (12 * 100)
@@ -81,10 +70,6 @@ elif args.type == 'annuity' and args.periods == None:
                     print(f'It will take {years} years and {months} months to repay this loan!')
         
         print(f'Overpayment = {overpayment}')    
-               
-       
-
-
 
     
 elif args.type == 'annuity' and args.payment == None:
